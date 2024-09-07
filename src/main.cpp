@@ -10,7 +10,7 @@ const byte maxCols = 12;
 int rDirection = 1;int cDirection = 1;
 
 byte frame[maxRows][maxCols] = {};
-byte currentRow = 3;
+byte currentRow = 0;
 byte currentCol = 0;
 
 void setup() {
@@ -28,7 +28,7 @@ void setup() {
 }
 
 void itHitBottomWall(byte currentRow, byte currentCol, int *rDirection, int *cDirection) {
-    if (currentRow < (maxRows - 1) || currentCol >= maxCols) {
+    if (currentRow < (maxRows - 1) ) {
         return;
     }
 
@@ -48,12 +48,12 @@ void itHitTopWall(byte currentRow, byte currentCol, int *rDirection, int *cDirec
         return;
     }
 
-    if (currentCol < (maxCols -1) && *rDirection < 0 && *cDirection > 0 ) {
+    if (*rDirection < 0 && *cDirection > 0 ) {
         *rDirection = 1;
         *cDirection = 1;
     }
 
-    if (currentCol < (maxCols -1) && *rDirection < 0 && *cDirection < 0 ) {
+    if (*rDirection < 0 && *cDirection < 0 ) {
         *rDirection = 1;
         *cDirection = -1;
     }
@@ -64,12 +64,12 @@ void itHitRightWall(byte currentRow, byte currentCol, int *rDirection, int *cDir
         return;
     }
 
-    if (currentRow < maxRows -1 && *rDirection > 0 && *cDirection > 0 ) {
+    if (*rDirection > 0 && *cDirection > 0 ) {
         *rDirection = 1;
         *cDirection = -1;
     }
 
-    if (currentRow < maxRows -1 && *rDirection < 0 && *cDirection > 0 ) {
+    if (*rDirection < 0 && *cDirection > 0 ) {
         *rDirection = -1;
         *cDirection = -1;
     }
@@ -123,7 +123,6 @@ void loop() {
     itHitRightWall(currentRow, currentCol, &rDirection, &cDirection);
     itHitLeftWall(currentRow, currentCol, &rDirection, &cDirection);
     itHitTheCorners(currentRow, currentCol, &rDirection, &cDirection);
-
 
     currentRow = currentRow + rDirection;
     currentCol = currentCol + cDirection;
