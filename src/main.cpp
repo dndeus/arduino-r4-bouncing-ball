@@ -7,7 +7,8 @@ int dt = 80;
 ArduinoLEDMatrix matrix;
 const byte maxRows = 8;
 const byte maxCols = 12;
-int rDirection = 1;int cDirection = 1;
+int rDirection = 1;
+int cDirection = 1;
 
 byte frame[maxRows][maxCols] = {};
 byte currentRow = 0;
@@ -130,5 +131,6 @@ void loop() {
     frame[prevRow][prevCol] = 0;
     frame[currentRow][currentCol] = 1;
     matrix.renderBitmap(frame, 8, 12);
+
     delay(dt);
 }
